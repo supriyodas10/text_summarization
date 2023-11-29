@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Text Summarizer</h1>
+
+        <form method="post" action="/" enctype="multipart/form-data">
+            <label for="source_choice">Select the input source:</label>
+            <select name="source_choice" id="source_choice" onchange="toggleInputs()">
+                <option value="1">Type or copy-paste text</option>
+                <option value="2">Read from .txt file</option>
+                <option value="3">Read from Wikipedia page</option>
+            </select>
+
+            <div id="text_input" class="input-section" style="display: none;">
+                <label for="text_input">Enter or copy-paste text:</label>
+                <textarea name="text_input" id="text_input" rows="5"></textarea>
+            </div>
+
+            <div id="file_input" class="input-section" style="display: none;">
+                <label for="file_input">Upload .txt file:</label>
+                <input type="file" name="file_input">
+            </div>
+
+            <div id="url_input" class="input-section" style="display: none;">
+                <label for="url_input">Enter Wikipedia page URL:</label>
+                <input type="url" name="url_input" id="url_input">
+            </div>
+
+            <input type="submit" value="Summarize">
+        </form>
+
+        {% if summary %}
+            <h2>Summary:</h2>
+            <p>{{ summary }}</p>
+        {% endif %}
+    </div>
+    <footer>
+        <div class="footer-content">
+            <p>Made by Supriyo</p>
+           
+        </div>
+    </footer>
+
+    <script>
+        function toggleInputs() {
+            var selectedOption = document.getElementById("source_choice").value;
+
+            document.getElementById("text_input").style.display = (selectedOption === "1") ? "block" : "none";
+            document.getElementById("file_input").style.display = (selectedOption === "2") ? "block" : "none";
+            document.getElementById("url_input").style.display = (selectedOption === "3") ? "block" : "none";
+        }
+
+        // Call toggleInputs on page load to  initialize the visibility of input sections
+        toggleInputs();
+    </script>
+</body>
+</html>

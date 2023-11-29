@@ -1,0 +1,6 @@
+Flask
+spacy
+scikit-learn
+PyPDF2
+beautifulsoup4
+
